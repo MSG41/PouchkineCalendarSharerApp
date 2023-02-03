@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "./NameUpdate.css";
 
-// import { createClient } from "contentful-management";
 const contentful = require("contentful-management");
 
 const client = contentful.createClient({
@@ -12,23 +11,31 @@ const NameUpdate = () => {
   const [formData, setFormData] = useState({
     eventTitle: "",
     eventDescription: "",
+    pouchkineDate: "",
   });
+
   const [error, setError] = useState({ eventTitle: "", eventDescription: "" });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-    if (value.length <= 0 || value.length < 3 || value.length > 60) {
-      setError({
-        ...error,
-        [name]: "Event title must be between 5 and 60 characters",
+    if (name === "pouchkineDate") {
+      setFormData({
+        ...formData,
+        [name]: value,
       });
     } else {
-      setError({ ...error, [name]: "" });
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+      if (value.length <= 0 || value.length < 3 || value.length > 60) {
+        setError({
+          ...error,
+          [name]: "Event title must be between 5 and 60 characters",
+        });
+      } else {
+        setError({ ...error, [name]: "" });
+      }
     }
   };
 
@@ -51,6 +58,9 @@ const NameUpdate = () => {
               },
               eventDescription: {
                 "en-US": formData.eventDescription,
+              },
+              pouchkineDate: {
+                "en-US": new Date().toISOString(),
               },
             },
           })
@@ -84,6 +94,13 @@ const NameUpdate = () => {
           onChange={handleChange}
         />
       </label>
+      <label htmlFor="date">Date:</label>
+      <input
+        type="date"
+        id="pouchkineDate"
+        valueAsDate={new Date(formData.pouchkineDate)}
+        onChange={handleChange}
+      />
 
       {(formData.eventTitle.length >= 3 && formData.eventDescription.length) >=
       3 ? (
@@ -91,118 +108,8 @@ const NameUpdate = () => {
           Submit
         </button>
       ) : null}
-      {/* {!error.eventTitle && !error.eventDescription ? (
-        <button className="button" type="submit">
-          Submit
-        </button>
-      ) : null} */}
     </form>
   );
-
-  // <form
-  //   style={{
-  //     position: "absolute",
-  //     top: "50vh",
-  //     left: "15%",
-  //   }}
-  //   onSubmit={handleSubmit}
-  // >
-  //   <h1
-  //     style={{
-  //       background: "white",
-  //       borderRadius: "10px",
-  //       width: "fit-content",
-  //       padding: "10px",
-  //       fontSize: "40px",
-  //     }}
-  //   >
-  //     Event Title
-  //   </h1>
-  //   <input
-  //     style={{
-  //       fontSize: "30px",
-  //       padding: "30px",
-  //       marginRight: "20px",
-  //       minWidth: "400px",
-  //       borderRadius: "10px",
-  //     }}
-  //     placeholder="Write your event title here !!!"
-  //     type="text"
-  //     name="eventTitle"
-  //     onChange={handleChange}
-  //   />
-  //   {/* <input type="text" name="eventDescription" /> */}
-  //   <button
-  //     onMouseOver="this.style.color='red'"
-  //     style={{
-  //       background: "white",
-  //       borderRadius: "10px",
-  //       width: "fit-content",
-  //       padding: "10px",
-  //       fontSize: "40px",
-  //     }}
-  //     type="submit"
-  //   >
-  //     Submit
-  //   </button>
-  // </form>
-  // );
 };
 
 export default NameUpdate;
-
-// Backup for getting an entry
-// const NameUpdate = async () => {
-// (eventTitle, newName)
-
-// Retrieve the entry
-// const space = await client.getSpace("3seggq75gekz");
-// // const environment = await space.getEnvironment("master");
-// const env = await space.getEnvironment("master");
-// console.log("The environoment is : ", env);
-
-// Modify the name field
-// entry.fields.name["en-US"] = newName;
-
-// Update the entry
-// await entry.update();
-
-//   console.log(`Entry "${eventTitle}" name updated to "${newName}"`);
-// };
-// catch (error) {
-//   console.error(error);
-// }
-// };
-
-// This code is working for retrieving my entry in contentful: NICE !
-
-// import { useState, useEffect } from "react";
-// import { createClient } from "contentful";
-
-// const client = createClient({
-//   space: "3seggq75gekz",
-//   accessToken: "dri45iG7hNQmgyIfpE1p3QQiF_geMBs3DDL6x8OxeYY",
-// });
-
-// function FormEntry() {
-//   const [entries, setEntries] = useState([]);
-
-//   useEffect(() => {
-//     client
-//       .getEntries({
-//         content_type: "form",
-//       })
-//       .then((response) => setEntries(response.items));
-//   }, []);
-
-//   return (
-//     <div>
-//       {entries.map((entry) => (
-//         <p style={{ fontSize: "40px" }} key={entry.sys.id}>
-//           {entry.fields.eventTitle}
-//         </p>
-//       ))}
-//     </div>
-//   );
-// }
-// export default FormEntry;
