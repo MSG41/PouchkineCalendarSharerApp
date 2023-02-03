@@ -1,14 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+// import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import NameUpdate from "./views/NameUpdate";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+// import Form from "./views/form";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <div>
+    {/* <App /> */}
+    <NameUpdate />
+  </div>
 );
 
 // If you want to start measuring performance in your app, pass a function

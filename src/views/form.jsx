@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+import { createClient } from "contentful-management";
+import "contentful-management";
+import "./Form.css";
 
-const Form = () => {
-  const [formData, setFormData] = useState({
-    field1: "",
-    field2: "",
-  });
+const client = createClient({
+  accessToken: "dri45iG7hNQmgyIfpE1p3QQiF_geMBs3DDL6x8OxeYY",
+});
+
+function Form() {
+  const [formData, setFormData] = useState({});
 
   const handleChange = (event) => {
     setFormData({
@@ -17,55 +21,38 @@ const Form = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch(
-        "https://api.contentful.com/spaces/<space_id>/entries",
-        {
-          method: "POST",
-          headers: {
-            Authorization: "Bearer <api_key>",
-            "Content-Type": "application/vnd.contentful.management.v1+json",
-          },
-          body: JSON.stringify({
-            fields: formData,
-          }),
-        }
-      );
+      const response = await client.getSpace("3seggq75gekz").then((space) => {
+        // This API call will request an environment with the specified ID
+        space.getEnvironment("master").then((environment) => {
+          // Now that we have an environment, we can get entries from that space
+          environment.getEntries().then((entries) => {
+            console.log(entries.items);
+          });
 
-      if (!response.ok) {
-        throw new Error(`Error creating entry: ${response.statusText}`);
-      }
+          // let's get a content type
+          environment.getContentType("form").then((contentType) => {
+            // and now let's update its name
+            contentType.name = "New Product";
+            contentType.update().then((updatedContentType) => {
+              console.log("Update was successful", updatedContentType);
+            });
+          });
+        });
+      });
 
-      console.log("Entry created");
+      console.log("Success:", response);
     } catch (error) {
-      console.error(error);
+      console.error("Error:", error);
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="field1">Field 1</label>
-        <input
-          type="text"
-          id="field1"
-          name="field1"
-          value={formData.field1}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="field2">Field 2</label>
-        <input
-          type="text"
-          id="field2"
-          name="field2"
-          value={formData.field2}
-          onChange={handleChange}
-        />
-      </div>
+      <input type="text" name="field1" onChange={handleChange} />
+      <input type="text" name="field2" onChange={handleChange} />
       <button type="submit">Submit</button>
     </form>
   );
-};
+}
 
 export default Form;
