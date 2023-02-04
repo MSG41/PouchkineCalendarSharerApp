@@ -1,3 +1,4 @@
+import moment from "moment";
 import { useState } from "react";
 import "./NameUpdate.css";
 
@@ -8,17 +9,20 @@ const client = contentful.createClient({
 });
 
 const NameUpdate = () => {
+  // (removing one hour from contentful)
+
   const [formData, setFormData] = useState({
     eventTitle: "",
     eventDescription: "",
-    pouchkineDate: "",
+    pouchkineDate: moment().format("YYYY-MM-DD"),
+    pouchkineTime: moment().format("HH:mm"),
   });
 
   const [error, setError] = useState({ eventTitle: "", eventDescription: "" });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    if (name === "pouchkineDate") {
+    if (name === "pouchkineDate" || name === "pouchkineTime") {
       setFormData({
         ...formData,
         [name]: value,
@@ -28,7 +32,8 @@ const NameUpdate = () => {
         ...formData,
         [name]: value,
       });
-      if (value.length <= 0 || value.length < 3 || value.length > 60) {
+
+      if (value.length <= 0 || value.length < 5 || value.length > 500) {
         setError({
           ...error,
           [name]: "Event title must be between 5 and 60 characters",
@@ -41,74 +46,109 @@ const NameUpdate = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!error.eventTitle && !error.eventDescription) {
-      // submit form data
-      alert("The form is submitted!!!!!! Bravo!!!", !error);
-    } else alert("Event title must be between 5 and 60 characters", error);
 
-    try {
-      const response = await client
-        .getSpace("3seggq75gekz")
-        .then((space) => space.getEnvironment("master"))
-        .then((environment) =>
-          environment.createEntry("form", {
-            fields: {
-              eventTitle: {
-                "en-US": formData.eventTitle,
+    if (!error.eventTitle && !error.eventDescription) {
+      try {
+        const response = await client
+          .getSpace("3seggq75gekz")
+          .then((space) => space.getEnvironment("master"))
+          .then((environment) =>
+            environment.createEntry("form", {
+              fields: {
+                eventTitle: {
+                  "en-US": formData.eventTitle,
+                },
+                eventDescription: {
+                  "en-US": formData.eventDescription,
+                },
+                pouchkineDate: {
+                  "en-US": new Date(
+                    `${formData.pouchkineDate}T${formData.pouchkineTime}:00.000Z`
+                  ).toISOString(),
+                },
               },
-              eventDescription: {
-                "en-US": formData.eventDescription,
-              },
-              pouchkineDate: {
-                "en-US": new Date().toISOString(),
-              },
-            },
-          })
-        )
-        .then((entry) => console.log(entry))
-        .catch(console.error);
-      console.log("the Title is submitted!!!!!!!! bravo", response);
-    } catch (error) {
-      console.error("Error:", error);
+            })
+          )
+          .then((entry) => entry.publish())
+          .then((entry) => console.log(entry))
+          .catch(console.error);
+
+        console.log("The form was submitted successfully:", response);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    } else {
+      alert("Event title and description must be between 5 and 60 characters");
     }
   };
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
-      <label className="label">
-        Event Title
-        <input
-          type="text"
-          name="eventTitle"
-          value={formData.eventTitle}
-          onChange={handleChange}
-        />
-      </label>
+    <div>
+      <div className="title"></div>
+      <form className="form" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label className="label">Event Title</label>
+          <input
+            type="text"
+            name="eventTitle"
+            value={formData.eventTitle}
+            onChange={handleChange}
+            className="input"
+            required
+          />
+        </div>
 
-      <label className="label">
-        Event Description
-        <input
-          type="text"
-          name="eventDescription"
-          value={formData.eventDescription}
-          onChange={handleChange}
-        />
-      </label>
-      <label htmlFor="date">Date:</label>
-      <input
-        type="date"
-        id="pouchkineDate"
-        valueAsDate={new Date(formData.pouchkineDate)}
-        onChange={handleChange}
-      />
+        <div className="form-group">
+          <label className="label">Event Description</label>
+          <textarea
+            className="textarea"
+            name="eventDescription"
+            value={formData.eventDescription}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-      {(formData.eventTitle.length >= 3 && formData.eventDescription.length) >=
-      3 ? (
-        <button className="button" type="submit">
+        <div className="form-group">
+          <label className="label">Event Date</label>
+          <input
+            type="date"
+            name="pouchkineDate"
+            value={formData.pouchkineDate}
+            onChange={handleChange}
+            className="input"
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label className="label">Event Time</label>
+          <input
+            type="time"
+            name="pouchkineTime"
+            value={formData.pouchkineTime}
+            onChange={handleChange}
+            className="input"
+            required
+          />
+        </div>
+
+        <button
+          className="button"
+          type="submit"
+          disabled={
+            formData.eventTitle.length < 5 ||
+            formData.eventDescription.length < 5 ||
+            !formData.eventTitle ||
+            !formData.eventDescription ||
+            !formData.pouchkineDate ||
+            !formData.pouchkineTime
+          }
+        >
           Submit
         </button>
-      ) : null}
-    </form>
+      </form>
+    </div>
   );
 };
 
