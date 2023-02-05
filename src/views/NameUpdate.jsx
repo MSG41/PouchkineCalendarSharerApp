@@ -73,8 +73,18 @@ const NameUpdate = () => {
           .then((entry) => console.log(entry))
           .catch(console.error);
 
+        alert(
+          "Well Done! the form has been submitted, the appointment is OOOOONNNN !!!!! "
+        );
+        setFormData({
+          eventTitle: "",
+          eventDescription: "",
+          pouchkineDate: moment().format("YYYY-MM-DD"),
+          pouchkineTime: moment().format("HH:mm"),
+        });
         console.log("The form was submitted successfully:", response);
       } catch (error) {
+        alert("EROOOR, fill all fields please !!! ");
         console.error("Error:", error);
       }
     } else {
@@ -135,14 +145,14 @@ const NameUpdate = () => {
         <button
           className="button"
           type="submit"
-          disabled={
-            formData.eventTitle.length < 5 ||
-            formData.eventDescription.length < 5 ||
-            !formData.eventTitle ||
-            !formData.eventDescription ||
-            !formData.pouchkineDate ||
-            !formData.pouchkineTime
-          }
+          // disabled={
+          //   formData.eventTitle.length < 5 ||
+          //   formData.eventDescription.length < 5 ||
+          //   !formData.eventTitle ||
+          //   !formData.eventDescription ||
+          //   !formData.pouchkineDate ||
+          //   !formData.pouchkineTime
+          // }
         >
           Submit
         </button>
