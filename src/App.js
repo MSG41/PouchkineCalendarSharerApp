@@ -1,6 +1,6 @@
 // This one has a buggy image :
 
-import React, { useState, useEffect, Profiler } from "react";
+import React, { useState, useEffect } from "react";
 import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import NameUpdate from "./views/NameUpdate";
