@@ -84,7 +84,6 @@ const NameUpdate = () => {
 
   return (
     <div>
-      <div className="title"></div>
       <form className="form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label className="label">Event Title</label>

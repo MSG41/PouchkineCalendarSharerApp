@@ -35,28 +35,12 @@ body {
   width: 50%;
 }
 
-.title {
-  position: absolute;
-  text-align: center;
-  top: 5vh;
-  left: 10vw;
-  width: 50%;
-  color: rgba(185, 149, 18, 0.834);
-  background-color: #f2f2f2;
-  border-radius: 20px;
-  padding: 20px;
-
-  height: fit-content;
-  font-size: 28px;
-  font-weight: 700;
-  font-family: "Luminari", "fantasy";
-}
 .label {
   text-align: left;
   margin-bottom: 10px;
   font-size: 25px;
   font-weight: 700;
-  font-family: "Comic Sans MS", "cursive";
+  /* font-family: "Comic Sans MS", "cursive"; */
 }
 
 input[type="text"],
@@ -68,11 +52,11 @@ input[type="time"] {
   border: 1px solid gray;
   width: 90%;
   margin-bottom: 20px;
-  font-family: "Comic Sans MS", "cursive";
+  /* font-family: "Comic Sans MS", "cursive"; */
 }
 .textarea {
   color: #070707;
-  font-family: "Comic Sans MS", "cursive";
+  /* font-family: "Comic Sans MS", "cursive"; */
   font-weight: 400;
   font-size: 18px;
   border-radius: none;
@@ -86,6 +70,7 @@ input[type="time"] {
   width: 95%;
   height: 100px;
   outline: 0;
+  resize: none;
 }
 .button {
   padding: 10px;
@@ -98,7 +83,7 @@ input[type="time"] {
   font-size: 30px;
   font-weight: 700;
   margin-top: 20px;
-  font-family: "Comic Sans MS", "cursive";
+  /* font-family: "Comic Sans MS", "cursive"; */
 }
 
 .button:hover {
