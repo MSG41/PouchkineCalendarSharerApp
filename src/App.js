@@ -45,6 +45,7 @@ function App() {
           .then((res) => {
             console.log(res.data);
             setProfile(res.data);
+            setIsOpen(true);
             localStorage.setItem("profile", JSON.stringify(res.data));
           });
       } catch (err) {
