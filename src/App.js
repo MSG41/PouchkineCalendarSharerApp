@@ -67,7 +67,7 @@ function App() {
   return (
     <div className="App">
       <nav className="navbar">
-        <div className="left-nav">Pouchie Cal</div>
+        <div className="left-nav">Poeshie Cal</div>
         <img src={piu} className="piu" alt="poeshie" />
         <div className="right-nav">
           {profile ? (
