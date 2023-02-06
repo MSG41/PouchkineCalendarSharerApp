@@ -9,7 +9,12 @@ const client = contentful.createClient({
 });
 
 const NameUpdate = () => {
-  // (removing one hour from contentful)
+  const [showMessage, setShowMessage] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleClose = () => {
+    setShowMessage(false);
+  };
 
   const [formData, setFormData] = useState({
     eventTitle: "",
@@ -46,6 +51,7 @@ const NameUpdate = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
 
     if (!error.eventTitle && !error.eventDescription) {
       try {
@@ -64,6 +70,7 @@ const NameUpdate = () => {
                 pouchkineDate: {
                   "en-US": new Date(
                     `${formData.pouchkineDate}T${formData.pouchkineTime}:00.000Z`
+                    // This fixes the Contentful hour difference ;) !!
                   ).toISOString(),
                 },
               },
@@ -73,9 +80,6 @@ const NameUpdate = () => {
           .then((entry) => console.log(entry))
           .catch(console.error);
 
-        alert(
-          "Well Done! the form has been submitted, the appointment is OOOOONNNN !!!!! "
-        );
         setFormData({
           eventTitle: "",
           eventDescription: "",
@@ -90,11 +94,14 @@ const NameUpdate = () => {
     } else {
       alert("Event title and description must be between 5 and 60 characters");
     }
+    setShowMessage(true);
+    setIsLoading(false);
   };
 
   return (
     <div>
       <form className="form" onSubmit={handleSubmit}>
+        {isLoading && <div className="spinner"></div>}
         <div className="form-group">
           <label className="label">Event Title</label>
           <input
@@ -157,6 +164,14 @@ const NameUpdate = () => {
           Submit
         </button>
       </form>
+      {showMessage && (
+        <div className="message">
+          <p>Thank you! The Form is submitted!</p>
+          <button className="message-button" onClick={handleClose}>
+            OK
+          </button>
+        </div>
+      )}
     </div>
   );
 };

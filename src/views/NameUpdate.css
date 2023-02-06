@@ -23,160 +23,119 @@ body {
 }
 
 .form {
-  position: absolute;
-  top: 20vh;
-  left: 10vw;
-  display: flex;
-  align-items: left;
-  flex-direction: column;
+  position: relative;
+  top: 5vh;
+  margin: auto;
   padding: 20px;
   background-color: #f2f2f29d;
   border-radius: 30px;
-  width: 50%;
+  width: 80vw;
+  height: 100%;
+}
+@media only screen and (min-width: 750px) {
+  .form {
+    width: 40vw;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  color: white;
 }
 
 .label {
-  text-align: left;
-  margin-bottom: 10px;
-  font-size: 25px;
+  font-size: 15px;
   font-weight: 700;
-  /* font-family: "Comic Sans MS", "cursive"; */
+  margin-bottom: 8px;
+  background: #ff69b4;
+  border-radius: 25px;
+  padding: 5px 10px 5px 10px;
 }
 
 input[type="text"],
 input[type="date"],
 input[type="time"] {
   padding: 10px;
-  font-size: 20px;
+  font-size: 18px;
   border-radius: 5px;
   border: 1px solid gray;
   width: 90%;
   margin-bottom: 20px;
-  /* font-family: "Comic Sans MS", "cursive"; */
+  height: 10px;
 }
 .textarea {
+  position: relative;
   color: #070707;
-  /* font-family: "Comic Sans MS", "cursive"; */
   font-weight: 400;
   font-size: 18px;
   border-radius: none;
   line-height: 22px;
-  /* background-color: #f0efee; */
   border: 3px solid;
   transition: all 0.3s;
-  /* padding: 13px; */
   margin-bottom: 10px;
-  box-sizing: border-box;
-  width: 95%;
   height: 100px;
   outline: 0;
   resize: none;
+  width: 93%;
 }
 .button {
+  position: relative;
+  margin: 8px auto 8px auto;
   padding: 10px;
-  background-color: blue;
+  background-color: #68d388;
   color: white;
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  width: 95%;
-  font-size: 30px;
-  font-weight: 700;
-  margin-top: 20px;
-  /* font-family: "Comic Sans MS", "cursive"; */
-}
-
-.button:hover {
-  background-color: yellowgreen;
-}
-
-/* 
-.form {
-  position: absolute;
-  top: 10vh;
-  left: 10vw;
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  padding: 20px;
-  background-color: #f2f2f2;
-  border-radius: 10px;
-  width: 50%;
-}
-
-.label {
-  text-align: left;
-  margin-bottom: 10px;
   font-size: 30px;
   font-weight: 700;
 }
 
-input[type="text"],
-input[type="date"],
-input[type="time"] {
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid gray;
-  width: 80%;
-  margin-bottom: 20px;
-}
-
-.button {
-  padding: 10px 20px;
-  background-color: blue;
-  color: white;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  font-size: 18px;
-  margin-top: 20px;
-}
-
 .button:hover {
-  background-color: yellowgreen;
-} */
+  background-color: #ff0028;
+}
 
-/* .form {
+.message {
   position: absolute;
-  top: 10vh;
-  left: 10vw;
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  padding: 20px;
-  background-color: #f2f2f2;
-  border-radius: 10px;
-  width: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max-content;
+  height: fit-content;
+  font-size: x-large;
+  border: 5px solid black;
+  background-color: lightgreen;
+  padding: 5px;
+  border-radius: 15px;
+  text-align: center;
+  font-weight: 700;
 }
 
-.label {
-  text-align: left;
-  margin-bottom: 10px;
+.message-button {
+  margin: auto auto 10px auto;
+  font-weight: 700;
+  font-size: larger;
 }
 
-input[type="text"] {
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid gray;
-  width: 80%;
-  margin-bottom: 20px;
+/* SPINNER */
+.spinner {
+  display: inline-block;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #ff0028;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 0.6s linear infinite;
 }
 
-.button {
-  padding: 10px 20px;
-  background-color: blue;
-  color: white;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  font-size: 80px;
-  margin-top: 20%;
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
-
-.button:hover {
-  background-color: yellowgreen;
-} */
