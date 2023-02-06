@@ -1,6 +1,6 @@
 import moment from "moment";
 import { useState } from "react";
-import "./NameUpdate.css";
+import "./Form.css";
 
 const contentful = require("contentful-management");
 
@@ -8,7 +8,7 @@ const client = contentful.createClient({
   accessToken: "CFPAT-HPgZzJrSBWw7tZvKo099X0Ua7d3y7XzAD9Ugk8cvceM",
 });
 
-const NameUpdate = () => {
+const Form = () => {
   const [showMessage, setShowMessage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -176,4 +176,4 @@ const NameUpdate = () => {
   );
 };
 
-export default NameUpdate;
+export default Form;

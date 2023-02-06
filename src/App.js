@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-import NameUpdate from "./views/NameUpdate";
+import Form from "./views/Form";
 import "./App.css";
 
 function App() {
@@ -93,7 +93,7 @@ function App() {
       {confirmationMessage ? (
         <p className="confirmation-message">{confirmationMessage}</p>
       ) : null}
-      {profile ? <NameUpdate /> : null}
+      {profile ? <Form /> : null}
     </div>
   );
 }
