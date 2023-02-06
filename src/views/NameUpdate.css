@@ -1,0 +1,141 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.form {
+  position: relative;
+  top: 5vh;
+  margin: auto;
+  padding: 20px;
+  background-color: #f2f2f29d;
+  border-radius: 30px;
+  width: 80vw;
+  height: 100%;
+}
+@media only screen and (min-width: 750px) {
+  .form {
+    width: 40vw;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.label {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  background: #ff69b4;
+  border-radius: 25px;
+  padding: 5px 10px 5px 10px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"] {
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  width: 90%;
+  margin-bottom: 20px;
+  height: 10px;
+}
+.textarea {
+  position: relative;
+  color: #070707;
+  font-weight: 400;
+  font-size: 18px;
+  border-radius: none;
+  line-height: 22px;
+  border: 3px solid;
+  transition: all 0.3s;
+  margin-bottom: 10px;
+  height: 100px;
+  outline: 0;
+  resize: none;
+  width: 93%;
+}
+.button {
+  position: relative;
+  margin: 8px auto 8px auto;
+  padding: 10px;
+  background-color: #68d388;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.button:hover {
+  background-color: #ff0028;
+}
+
+.message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max-content;
+  height: fit-content;
+  font-size: x-large;
+  border: 5px solid black;
+  background-color: lightgreen;
+  padding: 5px;
+  border-radius: 15px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.message-button {
+  margin: auto auto 10px auto;
+  font-weight: 700;
+  font-size: larger;
+}
+
+/* SPINNER */
+.spinner {
+  display: inline-block;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #ff0028;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

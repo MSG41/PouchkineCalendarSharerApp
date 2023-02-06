@@ -2,37 +2,82 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  height: 20px;
+  align-items: center;
+  padding: 10px 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.left-nav {
+  display: flex;
+  position: relative;
+  left: 10%;
+}
+.right-nav {
+  display: flex;
+  align-items: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.profile {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.profile-name {
+  margin-right: 10px;
+}
+
+button {
+  background-color: #61dafb;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.user-info {
+  text-align: left;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+img {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  font-size: small;
+  background-color: #f9f9f9;
+  top: 40px;
+  right: -20px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 20px 20px;
+  /* overflow-wrap: break-word; */
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }
