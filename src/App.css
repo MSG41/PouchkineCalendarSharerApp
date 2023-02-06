@@ -81,3 +81,13 @@ img {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
+.piu {
+  position: relative;
+  display: flex;
+  top: 2.2rem;
+  width: 6rem;
+  height: 6rem;
+  /* mix-blend-mode: multiply; */
+  /* filter: contrast(1); */
+}

@@ -3,6 +3,7 @@ import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import Form from "./views/Form";
 import "./App.css";
+import piu from "./Assets/images/piu.jpg";
 
 function App() {
   const [user, setUser] = useState(
@@ -67,6 +68,7 @@ function App() {
     <div className="App">
       <nav className="navbar">
         <div className="left-nav">Pouchie Cal</div>
+        <img src={piu} className="piu" alt="poeshie" />
         <div className="right-nav">
           {profile ? (
             <div className="dropdown">
