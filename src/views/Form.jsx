@@ -5,7 +5,7 @@ import "./Form.css";
 const contentful = require("contentful-management");
 
 const client = contentful.createClient({
-  accessToken: "CFPAT-HPgZzJrSBWw7tZvKo099X0Ua7d3y7XzAD9Ugk8cvceM",
+  accessToken: process.env.REACT_APP_CONTENTFUL_ACCESS_TOKEN,
 });
 
 const Form = () => {
@@ -56,8 +56,10 @@ const Form = () => {
     if (!error.eventTitle && !error.eventDescription) {
       try {
         const response = await client
-          .getSpace("3seggq75gekz")
-          .then((space) => space.getEnvironment("master"))
+          .getSpace(process.env.CONTENTFUL_SPACE_ID)
+          .then((space) =>
+            space.getEnvironment(process.env.CONTENTFUL_ENVIRONMENT)
+          )
           .then((environment) =>
             environment.createEntry("form", {
               fields: {

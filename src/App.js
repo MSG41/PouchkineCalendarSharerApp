@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import Form from "./views/Form";
@@ -12,7 +12,22 @@ function App() {
   const [profile, setProfile] = useState(
     JSON.parse(localStorage.getItem("profile")) || null
   );
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const node = useRef();
+
+  const handleClick = (e) => {
+    if (node.current.contains(e.target)) {
+      return;
+    }
+    setIsOpen(false);
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClick);
+    return () => {
+      document.removeEventListener("click", handleClick);
+    };
+  }, []);
 
   const [confirmationMessage, setConfirmationMessage] = useState("");
 
@@ -21,9 +36,10 @@ function App() {
       setUser(codeResponse);
       localStorage.setItem("user", JSON.stringify(codeResponse));
       setConfirmationMessage("Login Successful");
-      setTimeout(() => setConfirmationMessage(""), 2500);
       setIsOpen(true);
+      setTimeout(() => setConfirmationMessage(""), 2500);
     },
+
     onError: (error) => {
       console.log("Login Failed:", error);
       setConfirmationMessage("Login Failed");
@@ -46,7 +62,6 @@ function App() {
           .then((res) => {
             console.log(res.data);
             setProfile(res.data);
-            setIsOpen(true);
             localStorage.setItem("profile", JSON.stringify(res.data));
           });
       } catch (err) {
@@ -63,7 +78,6 @@ function App() {
     setConfirmationMessage("Logout Successful");
     setTimeout(() => setConfirmationMessage(""), 2500);
   };
-
   return (
     <div className="App">
       <nav className="navbar">
@@ -71,17 +85,19 @@ function App() {
         <img src={piu} className="piu" alt="poeshie" />
         <div className="right-nav">
           {profile ? (
-            <div className="dropdown">
+            <div className="dropdown" ref={node}>
               <p className="dropdown-toggle" onClick={() => setIsOpen(!isOpen)}>
                 {profile.name}
               </p>
               {isOpen ? (
                 <div className="dropdown-content">
                   <img src={profile.picture} alt="user" />
-                  <p>Name: {profile.name}</p>
-                  <p>Email Address: {profile.email}</p>
-                  <br />
-
+                  <p>
+                    <b>Name:</b> {profile.name}
+                  </p>
+                  <p>
+                    <b>Email:</b> {profile.email}
+                  </p>
                   <br />
                   <button onClick={logOut}>Log out</button>
                 </div>
