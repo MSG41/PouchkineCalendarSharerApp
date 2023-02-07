@@ -87,6 +87,30 @@ img {
   top: 2.2rem;
   width: 6rem;
   height: 6rem;
-  /* mix-blend-mode: multiply; */
-  /* filter: contrast(1); */
+  background: transparent;
+}
+
+.confirmation-message {
+  position: absolute;
+  top: 70px;
+  right: 8px;
+  margin: auto;
+  background: #ff69b4;
+  color: white;
+  border-radius: 20px;
+  padding: 3px 8px 3px 8px;
+  opacity: 0;
+  animation: fadeInOut 3s ease-in-out forwards;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

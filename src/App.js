@@ -3,7 +3,7 @@ import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import Form from "./views/Form";
 import "./App.css";
-import piu from "./Assets/images/piu.jpg";
+import piu from "./Assets/images/piu-tr.png";
 
 function App() {
   const [user, setUser] = useState(
@@ -18,11 +18,11 @@ function App() {
 
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
-      setIsOpen(true);
       setUser(codeResponse);
       localStorage.setItem("user", JSON.stringify(codeResponse));
       setConfirmationMessage("Login Successful");
-      setTimeout(() => setConfirmationMessage(""), 1500);
+      setTimeout(() => setConfirmationMessage(""), 2500);
+      setIsOpen(true);
     },
     onError: (error) => {
       console.log("Login Failed:", error);
@@ -61,7 +61,7 @@ function App() {
     localStorage.removeItem("profile");
     setProfile(null);
     setConfirmationMessage("Logout Successful");
-    setTimeout(() => setConfirmationMessage(""), 1500);
+    setTimeout(() => setConfirmationMessage(""), 2500);
   };
 
   return (
