@@ -78,7 +78,6 @@ function App() {
     setConfirmationMessage("Logout Successful");
     setTimeout(() => setConfirmationMessage(""), 2500);
   };
-
   return (
     <div className="App">
       <nav className="navbar">
@@ -93,10 +92,12 @@ function App() {
               {isOpen ? (
                 <div className="dropdown-content">
                   <img src={profile.picture} alt="user" />
-                  <p>Name: {profile.name}</p>
-                  <p>Email Address: {profile.email}</p>
-                  <br />
-
+                  <p>
+                    <b>Name:</b> {profile.name}
+                  </p>
+                  <p>
+                    <b>Email:</b> {profile.email}
+                  </p>
                   <br />
                   <button onClick={logOut}>Log out</button>
                 </div>
