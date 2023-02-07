@@ -19,11 +19,16 @@ const Form = () => {
   const [formData, setFormData] = useState({
     eventTitle: "",
     eventDescription: "",
+    location: "",
     pouchkineDate: moment().format("YYYY-MM-DD"),
     pouchkineTime: moment().format("HH:mm"),
   });
 
-  const [error, setError] = useState({ eventTitle: "", eventDescription: "" });
+  const [error, setError] = useState({
+    eventTitle: "",
+    eventDescription: "",
+    location: "",
+  });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -38,15 +43,42 @@ const Form = () => {
         [name]: value,
       });
 
-      if (value.length <= 0 || value.length < 5 || value.length > 500) {
+      if (value.length < 5 || value.length > 500) {
         setError({
           ...error,
-          [name]: "Event title must be between 5 and 60 characters",
+          [name]:
+            "Event title and description must be between 5 and 500 characters",
         });
       } else {
         setError({ ...error, [name]: "" });
       }
     }
+  };
+
+  // Location Suggestions:
+  const [suggestions, setSuggestions] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const handleLocationChange = async (value) => {
+    setFormData({ ...formData, location: value });
+    setLoading(true);
+    setTimeout(async () => {
+      try {
+        const response = await fetch(
+          `https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?access_token=pk.eyJ1Ijoic2FsaW1pdGxlc3MiLCJhIjoiY2tsMDBnbDVnMHYxZzJvbW9qZ3BvajY2bSJ9.G1OmhUI_1cUKsDROu1V9bA`
+        );
+        const data = await response.json();
+        console.log("suggestion data: ", data.features);
+        setSuggestions(data.features);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }, 1000);
+  };
+
+  const handleLocationSelect = (selectedLocation) => {
+    setFormData({ ...formData, location: selectedLocation });
   };
 
   const handleSubmit = async (event) => {
@@ -56,10 +88,8 @@ const Form = () => {
     if (!error.eventTitle && !error.eventDescription) {
       try {
         const response = await client
-          .getSpace(process.env.CONTENTFUL_SPACE_ID)
-          .then((space) =>
-            space.getEnvironment(process.env.CONTENTFUL_ENVIRONMENT)
-          )
+          .getSpace("3seggq75gekz")
+          .then((space) => space.getEnvironment("master"))
           .then((environment) =>
             environment.createEntry("form", {
               fields: {
@@ -68,6 +98,9 @@ const Form = () => {
                 },
                 eventDescription: {
                   "en-US": formData.eventDescription,
+                },
+                location: {
+                  "en-US": formData.location,
                 },
                 pouchkineDate: {
                   "en-US": new Date(
@@ -85,6 +118,7 @@ const Form = () => {
         setFormData({
           eventTitle: "",
           eventDescription: "",
+          location: "",
           pouchkineDate: moment().format("YYYY-MM-DD"),
           pouchkineTime: moment().format("HH:mm"),
         });
@@ -125,6 +159,31 @@ const Form = () => {
             onChange={handleChange}
             required
           />
+        </div>
+        <div className="form-group">
+          <label className="label">Event Location</label>
+          <input
+            type="text"
+            className="input"
+            required
+            value={formData.location}
+            onChange={(e) => handleLocationChange(e.target.value)}
+            placeholder="Enter event location"
+          />
+          {suggestions.length > 0 && (
+            <div className="location-suggestions">
+              {loading && <div className="spinner"></div>}
+              {suggestions.map((suggestion, index) => (
+                <div
+                  className="location-suggestion"
+                  key={index}
+                  onClick={() => handleLocationSelect(suggestion.place_name)}
+                >
+                  {suggestion.place_name}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="form-group">
