@@ -88,7 +88,7 @@ function App() {
               ) : null}
             </div>
           ) : (
-            <button onClick={() => login()}>Sign in with Google 🚀 </button>
+            <button onClick={() => login()}>Sign in</button>
           )}
         </div>
       </nav>
