@@ -231,7 +231,7 @@ const Form = () => {
         </button>
         {showMessage && (
           <div className="message">
-            <p>Thank you! The Form is submitted!</p>
+            <p className="msg">The Form is submitted!</p>
             <button className="message-button" onClick={handleClose}>
               OK
             </button>
