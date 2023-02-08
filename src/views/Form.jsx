@@ -1,6 +1,7 @@
 import moment from "moment";
 import { useState } from "react";
 import "./Form.css";
+import Spinner from "../Components/Spinner/Spinner";
 
 const contentful = require("contentful-management");
 
@@ -137,14 +138,15 @@ const Form = () => {
   };
 
   return (
-    <div>
+    <div className="wrapper">
       <form className="form" onSubmit={handleSubmit}>
-        {isLoading && <div className="spinner"></div>}
+        {isLoading && <Spinner />}
         <div className="form-group">
           <label className="label">Event Title</label>
           <input
             type="text"
             name="eventTitle"
+            placeholder="Enter event title"
             value={formData.eventTitle}
             onChange={handleChange}
             className="input"
@@ -156,6 +158,7 @@ const Form = () => {
           <label className="label">Event Description</label>
           <textarea
             className="textarea"
+            placeholder="Enter event description..."
             name="eventDescription"
             value={formData.eventDescription}
             onChange={handleChange}
@@ -174,7 +177,7 @@ const Form = () => {
           />
           {!suggestionSelected && suggestions.length > 0 && (
             <div className="location-suggestions">
-              {loading && <div className="spinner"></div>}
+              {loading && <Spinner />}
 
               {suggestions.map((suggestion, index) => (
                 <div
@@ -212,7 +215,6 @@ const Form = () => {
             required
           />
         </div>
-
         <button
           className="button"
           type="submit"
@@ -227,15 +229,18 @@ const Form = () => {
         >
           Submit
         </button>
+        {showMessage && (
+          <div className="message">
+            <p>Thank you! The Form is submitted!</p>
+            <button className="message-button" onClick={handleClose}>
+              OK
+            </button>
+          </div>
+        )}
       </form>
-      {showMessage && (
-        <div className="message">
-          <p>Thank you! The Form is submitted!</p>
-          <button className="message-button" onClick={handleClose}>
-            OK
-          </button>
-        </div>
-      )}
+      <footer className="form-footer">
+        <p>&copy; MSG41 Designs</p>
+      </footer>
     </div>
   );
 };
