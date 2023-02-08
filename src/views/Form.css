@@ -30,7 +30,7 @@ body {
   background-color: #f2f2f29d;
   border-radius: 30px;
   width: 80vw;
-  height: min-content;
+  height: calc(80vh - 10px);
 }
 @media only screen and (min-width: 750px) {
   .form {
@@ -83,7 +83,7 @@ input[type="time"] {
 }
 .button {
   position: relative;
-  margin: auto auto 0 auto;
+  margin: auto auto 10px auto;
   padding: 10px;
   background-color: #68d388;
   color: white;
@@ -105,7 +105,7 @@ input[type="time"] {
   transform: translate(-50%, -50%);
   width: max-content;
   height: fit-content;
-  font-size: x-large;
+  font-size: large;
   border: 5px solid black;
   background-color: lightgreen;
   padding: 5px;

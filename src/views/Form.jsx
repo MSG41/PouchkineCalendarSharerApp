@@ -43,7 +43,7 @@ const Form = () => {
         [name]: value,
       });
 
-      if (value.length < 5 || value.length > 500) {
+      if (value.length <= 2 || value.length > 500) {
         setError({
           ...error,
           [name]:
@@ -57,6 +57,7 @@ const Form = () => {
 
   // Location Suggestions:
   const [suggestions, setSuggestions] = useState([]);
+  const [suggestionSelected, setSuggestionSelected] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleLocationChange = async (value) => {
@@ -79,6 +80,7 @@ const Form = () => {
 
   const handleLocationSelect = (selectedLocation) => {
     setFormData({ ...formData, location: selectedLocation });
+    setSuggestionSelected(true);
   };
 
   const handleSubmit = async (event) => {
@@ -124,7 +126,7 @@ const Form = () => {
         });
         console.log("The form was submitted successfully:", response);
       } catch (error) {
-        alert("EROOOR, fill all fields please !!! ");
+        // alert("EROOOR, fill all fields please !!! ");
         console.error("Error:", error);
       }
     } else {
@@ -170,9 +172,10 @@ const Form = () => {
             onChange={(e) => handleLocationChange(e.target.value)}
             placeholder="Enter event location"
           />
-          {suggestions.length > 0 && (
+          {!suggestionSelected && suggestions.length > 0 && (
             <div className="location-suggestions">
               {loading && <div className="spinner"></div>}
+
               {suggestions.map((suggestion, index) => (
                 <div
                   className="location-suggestion"
@@ -213,14 +216,14 @@ const Form = () => {
         <button
           className="button"
           type="submit"
-          // disabled={
-          //   formData.eventTitle.length < 5 ||
-          //   formData.eventDescription.length < 5 ||
-          //   !formData.eventTitle ||
-          //   !formData.eventDescription ||
-          //   !formData.pouchkineDate ||
-          //   !formData.pouchkineTime
-          // }
+          hidden={
+            formData.eventTitle.length <= 2 ||
+            formData.eventDescription.length <= 2 ||
+            !formData.eventTitle ||
+            !formData.eventDescription ||
+            !formData.pouchkineDate ||
+            !formData.pouchkineTime
+          }
         >
           Submit
         </button>
