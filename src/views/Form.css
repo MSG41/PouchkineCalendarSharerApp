@@ -92,9 +92,16 @@ input[type="time"] {
   font-size: 14px;
   font-weight: bold;
   border-radius: 5px;
-  border: 1px solid gray;
+  border: 1px solid white;
+  outline: none;
+
   width: 90%;
   margin-bottom: 8px;
+}
+input:focus {
+  outline: none;
+  border: 1px solid #ff69b4;
+  transition: all 0.3s;
 }
 
 .textarea {
@@ -104,13 +111,17 @@ input[type="time"] {
   font-size: 14px;
   border-radius: none;
   line-height: 22px;
-  border: 3px solid;
+  border: 1px solid white;
   transition: all 0.3s;
   margin-bottom: 8px;
   height: 100px;
-  outline: 0;
+  outline: white;
   resize: none;
   width: 93%;
+}
+.textarea:focus {
+  outline: none;
+  border: 1px solid #ff69b4;
 }
 
 .button {
