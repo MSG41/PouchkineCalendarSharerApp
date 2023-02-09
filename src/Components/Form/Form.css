@@ -2,53 +2,35 @@ html,
 body {
   width: 100%;
   height: 100%;
+  min-height: 667px;
 }
-
-/* body {
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  background-size: 400% 400%;
-  animation: gradient 10s ease-in-out infinite;
-}
-
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-} */
 
 .wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: fit-content;
+  min-height: 667px;
+  /* max-height: 100%; */
+  height: auto;
+}
+
+@media (min-height: 727px) {
+  .wrapper {
+    height: 100vh;
+  }
 }
 
 .form {
   flex: 1;
+  position: absolute;
+  align-content: center;
   margin: 20px;
   padding: 20px;
   background-color: #f2f2f292;
   border-radius: 30px;
   width: 80vw;
-}
 
-.form-footer {
-  position: absolute;
-  bottom: 0;
-  font-size: smaller;
-  color: white;
-  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
-}
-
-.footer {
-  font-size: 8px;
+  /* height: fit-content; */
 }
 
 @media only screen and (min-width: 750px) {
@@ -57,31 +39,16 @@ body {
   }
 }
 
-@media (min-width: 375px) {
-  .form {
-    margin-bottom: 10px;
-    min-height: fit-content;
-  }
-  /* .message {
-    width: 80vw;
-  } */
-}
-@media (max-width: 375px) {
-  .form-footer {
-    position: relative;
-  }
-}
-
 .form-group {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   margin-bottom: 20px;
   color: white;
 }
 
 .label {
   font-size: 14px;
+  display: flex;
+  width: fit-content;
   font-weight: 700;
   margin-bottom: 8px;
   background: #ff69b4;

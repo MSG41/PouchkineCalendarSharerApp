@@ -248,9 +248,9 @@ const Form = (props) => {
           </div>
         )}
       </form>
-      <footer className="form-footer">
+      {/* <footer className="form-footer">
         <p className="footer">&copy; MSG41 Designs</p>
-      </footer>
+      </footer> */}
     </div>
   );
 };

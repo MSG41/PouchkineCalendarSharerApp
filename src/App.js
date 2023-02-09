@@ -3,15 +3,16 @@
 
 import HomeView from "./views/home/home.view.js";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import React from "react";
 
 function App() {
   return (
     <div className="App">
-      <div>
-        <GoogleOAuthProvider clientId="265591396-dje5b1eiffj5aoq9c0dqmburuq4ugkvm.apps.googleusercontent.com">
-          <HomeView />
-        </GoogleOAuthProvider>
-        {/* <div>
+      <GoogleOAuthProvider clientId="265591396-dje5b1eiffj5aoq9c0dqmburuq4ugkvm.apps.googleusercontent.com">
+        <HomeView />
+      </GoogleOAuthProvider>
+
+      {/* <div>
         {ROUTES.filter((singleRoute) => singleRoute.inNav).map(
           (singleRoute) => (
             <NavLink
@@ -31,7 +32,6 @@ function App() {
           <Route key={singleRoute.id} {...singleRoute} />
         ))}
       </Routes> */}
-      </div>
     </div>
   );
 }

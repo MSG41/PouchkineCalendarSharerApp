@@ -14,7 +14,9 @@ root.render(
     {/* <React.Fragment> */}
     {/* <GoogleOAuthProvider clientId="265591396-dje5b1eiffj5aoq9c0dqmburuq4ugkvm.apps.googleusercontent.com"> */}
     {/* <HomeView /> */}
+
     <App />
+
     {/* </GoogleOAuthProvider> */}
     {/* </React.Fragment> */}
   </BrowserRouter>
