@@ -15,19 +15,15 @@ function App() {
   const [profile, setProfile] = useState(
     JSON.parse(localStorage.getItem("profile")) || null
   );
+
   const [isOpen, setIsOpen] = useState(false);
   const node = useRef();
-
+  const ConfettiExplosionMemo = React.memo(ConfettiExplosion);
   const [isExploding, setIsExploding] = useState(false);
-  console.log("is exploding: ", isExploding);
   const [isShaking, setIsShaking] = useState(false);
-  console.log("is shaking: ", isShaking);
   const [active, setActive] = useState(false);
 
   const handleClick = (e) => {
-    // setIsExploding(true);
-    // setIsShaking(true);
-    // setActive(true);
     if (node.current.contains(e.target)) {
       return;
     }
@@ -107,7 +103,7 @@ function App() {
         />
         <div className="divexplode">
           {isExploding && (
-            <ConfettiExplosion
+            <ConfettiExplosionMemo
               force={0.4}
               duration={2000}
               particleCount={100}
