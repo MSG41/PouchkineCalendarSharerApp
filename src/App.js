@@ -20,8 +20,14 @@ function App() {
 
   const [isExploding, setIsExploding] = useState(false);
   console.log("is exploding: ", isExploding);
+  const [isShaking, setIsShaking] = useState(false);
+  console.log("is shaking: ", isShaking);
+  const [active, setActive] = useState(false);
 
   const handleClick = (e) => {
+    // setIsExploding(true);
+    // setIsShaking(true);
+    // setActive(true);
     if (node.current.contains(e.target)) {
       return;
     }
@@ -90,10 +96,14 @@ function App() {
         <div className="left-nav">Poeshie Cal</div>
         <img
           src={piu}
-          onMouseEnter={() => setTimeout(setIsExploding(!isExploding), 2000)}
-          className="piu"
+          onClick={() => {
+            setIsExploding(!isExploding);
+            setIsShaking(!isShaking);
+            setActive(!active);
+          }}
+          className={`piu ${active ? "active" : ""}`}
+          // className="piu"
           alt="poeshie"
-          id="confetti-piu"
         />
         <div className="divexplode">
           {isExploding && (
@@ -102,7 +112,6 @@ function App() {
               duration={2000}
               particleCount={100}
               height={169}
-              // width={700}
               floorWidth={350}
             />
           )}
