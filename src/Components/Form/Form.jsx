@@ -6,7 +6,7 @@ import "../../views/home/home.view.js";
 const contentful = require("contentful-management");
 
 const client = contentful.createClient({
-  accessToken: process.env.REACT_APP_CONTENTFUL_ACCESS_TOKEN,
+  accessToken: "CFPAT-HPgZzJrSBWw7tZvKo099X0Ua7d3y7XzAD9Ugk8cvceM",
 });
 
 const Form = (props) => {
@@ -249,7 +249,7 @@ const Form = (props) => {
         )}
       </form>
       <footer className="form-footer">
-        <p>&copy; MSG41 Designs</p>
+        <p className="footer">&copy; MSG41 Designs</p>
       </footer>
     </div>
   );
