@@ -99,10 +99,12 @@ const Form = (props) => {
             environment.createEntry("form", {
               fields: {
                 username: {
-                  "en-US": name,
+                  "en-US":
+                    typeof name === "string" ? name : JSON.stringify(name),
                 },
                 email: {
-                  "en-US": email,
+                  "en-US":
+                    typeof email === "string" ? email : JSON.stringify(email),
                 },
                 eventTitle: {
                   "en-US": formData.eventTitle,
