@@ -1,15 +1,17 @@
 import moment from "moment";
 import { useState } from "react";
-import "./Form.css";
-import Spinner from "../Components/Spinner/Spinner";
-
+import "../Form/Form.css";
+import Spinner from "../Spinner/Spinner";
+import "../../views/home/home.view.js";
 const contentful = require("contentful-management");
 
 const client = contentful.createClient({
   accessToken: process.env.REACT_APP_CONTENTFUL_ACCESS_TOKEN,
 });
 
-const Form = () => {
+const Form = (props) => {
+  const { name, email } = props.profile;
+
   const [showMessage, setShowMessage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -96,6 +98,12 @@ const Form = () => {
           .then((environment) =>
             environment.createEntry("form", {
               fields: {
+                username: {
+                  "en-US": name,
+                },
+                email: {
+                  "en-US": email,
+                },
                 eventTitle: {
                   "en-US": formData.eventTitle,
                 },
