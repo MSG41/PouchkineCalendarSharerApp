@@ -172,6 +172,10 @@ const Form = (props) => {
             name="eventDescription"
             value={formData.eventDescription}
             onChange={handleChange}
+            style={{
+              fontSize:
+                formData.eventDescription.length > 25 ? "0.9em" : "1.5em",
+            }}
             required
           />
         </div>
@@ -187,6 +191,9 @@ const Form = (props) => {
               setSuggestionSelected(false)
             }
             placeholder="Enter event location"
+            style={{
+              fontSize: formData.location.length > 7 ? "0.9em" : "1.5em",
+            }}
           />
           {!suggestionSelected && suggestions.length > 0 && (
             <div className="location-suggestions">
@@ -196,6 +203,10 @@ const Form = (props) => {
                 <div
                   className="location-suggestion"
                   key={index}
+                  style={{
+                    fontSize:
+                      suggestion.place_name.length > 10 ? "0.9em" : "1.5em",
+                  }}
                   onClick={() => handleLocationSelect(suggestion.place_name)}
                 >
                   {suggestion.place_name}
