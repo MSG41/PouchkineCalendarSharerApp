@@ -182,7 +182,10 @@ const Form = (props) => {
             className="input"
             required
             value={formData.location}
-            onChange={(e) => handleLocationChange(e.target.value)}
+            onChange={(e) =>
+              handleLocationChange(e.target.value) &&
+              setSuggestionSelected(false)
+            }
             placeholder="Enter event location"
           />
           {!suggestionSelected && suggestions.length > 0 && (

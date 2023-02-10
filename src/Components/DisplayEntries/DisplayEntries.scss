@@ -1,0 +1,36 @@
+.entry {
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  h3 {
+    font-size: 0.35rem;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 0.25rem;
+    margin-bottom: 5px;
+  }
+}
+
+.wrapper-entries {
+  padding: 20px;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  align-items: center;
+  top: 5vh;
+  left: 76.25vw;
+  height: 100px;
+  width: 20vw;
+  background: rgba(255, 253, 253, 0.814);
+  border-radius: 30px;
+  overflow-y: scroll;
+}
+.center::-webkit-scrollbar {
+  display: none;
+}

@@ -6,6 +6,7 @@ import piu from "../../Assets/images/piu-tr.png";
 import Spinner from "../../Components/Spinner/Spinner.jsx";
 import ConfettiExplosion from "confetti-explosion-react";
 import Footer from "../../Components/Footer/Footer";
+import DisplayEntries from "../../Components/DisplayEntries/DisplayEntries";
 // import Form from "../../Components/Form/Form.jsx";
 // import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
 // import services from "../../services/index.services";
@@ -169,7 +170,9 @@ const HomeView = () => {
           <Form profile={{ name: profile.name, email: profile.email }} />
         </Suspense>
       ) : null}
+
       <Footer />
+      <DisplayEntries />
     </div>
   );
 };
