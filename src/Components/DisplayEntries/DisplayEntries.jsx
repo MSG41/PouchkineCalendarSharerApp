@@ -27,7 +27,7 @@ const DisplayEntries = () => {
     <div className="center">
       <div className="wrapper-entries">
         {" "}
-        <h3>DATA: </h3>
+        <h3>DATA</h3>
         {entries.map((entry) => (
           <div className="entry" key={entry.sys.id}>
             <h3>Event Title: {entry.fields.eventTitle["en-US"]}</h3>
