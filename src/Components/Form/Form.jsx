@@ -179,7 +179,7 @@ const Form = (props) => {
           <label className="label">Event Location</label>
           <input
             type="text"
-            className="input"
+            className="textLocation"
             required
             value={formData.location}
             onChange={(e) =>
