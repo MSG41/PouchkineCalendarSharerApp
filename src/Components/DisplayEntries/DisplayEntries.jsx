@@ -34,6 +34,8 @@ const DisplayEntries = () => {
             <p>Event Description: {entry.fields.eventDescription["en-US"]}</p>
             <p>Location: {entry.fields.location["en-US"]}</p>
             <p>Date: {entry.fields.pouchkineDate["en-US"]}</p>
+            <p>Username:{entry.fields.username["en-US"]} </p>
+            <p>E-mail: {entry.fields.email["en-US"]} </p>
           </div>
         ))}
       </div>

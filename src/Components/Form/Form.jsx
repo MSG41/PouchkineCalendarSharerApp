@@ -160,7 +160,7 @@ const Form = (props) => {
             value={formData.eventTitle}
             onChange={handleChange}
             style={{
-              fontSize: formData.eventTitle.length > 7 ? "0.9em" : "1.5em",
+              fontSize: formData.eventTitle.length > 25 ? "0.9em" : "1.5em",
             }}
             className="input"
             required
